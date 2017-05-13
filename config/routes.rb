@@ -1,4 +1,5 @@
 Rails.application.routes.draw do
+  resources :runs
   namespace :api, defaults: {format: :json} do
     %w(v1).each do |version|
       namespace version.to_sym do

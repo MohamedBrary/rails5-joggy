@@ -8,6 +8,7 @@ class User < ApplicationRecord
 
   has_many :identities, dependent: :destroy  
   has_many :user_tokens, dependent: :destroy
+  has_many :runs, dependent: :destroy
   
   # -- Validations
     

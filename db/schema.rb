@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20170509142922) do
+ActiveRecord::Schema.define(version: 20170513203440) do
 
   create_table "identities", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
     t.bigint "user_id"
@@ -27,6 +27,17 @@ ActiveRecord::Schema.define(version: 20170509142922) do
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["user_id"], name: "index_identities_on_user_id"
+  end
+
+  create_table "runs", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
+    t.date "date", null: false
+    t.integer "duration", null: false
+    t.integer "distance", null: false
+    t.float "avg_speed", limit: 24, null: false
+    t.bigint "user_id", null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["user_id"], name: "index_runs_on_user_id"
   end
 
   create_table "sessions", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
@@ -67,5 +78,6 @@ ActiveRecord::Schema.define(version: 20170509142922) do
   end
 
   add_foreign_key "identities", "users"
+  add_foreign_key "runs", "users"
   add_foreign_key "user_tokens", "users"
 end

@@ -1,0 +1,20 @@
+.page-header
+  = link_to runs_path, class: 'btn btn-default' do
+    %span.glyphicon.glyphicon-list-alt
+    Back
+  = link_to edit_run_path(@run), class: 'btn btn-primary' do
+    %span.glyphicon.glyphicon-pencil
+    Edit
+  %h1 Show run
+
+%dl.dl-horizontal
+  %dt Date:
+  %dd= @run.date
+  %dt Duration:
+  %dd= @run.duration
+  %dt Distance:
+  %dd= @run.distance
+  %dt Avg speed:
+  %dd= @run.avg_speed
+  %dt User:
+  %dd= @run.user

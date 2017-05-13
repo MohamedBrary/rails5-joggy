@@ -25,14 +25,14 @@ class ApplicationPolicy
   end
 
   def update?
-    current_user_allowed_to_crud?
+    !record.is_a?(Class) && record.present? && 
+      scope.where(:id => record.id).exists? &&
+      current_user_allowed_to_crud?
   end
 
   # will catch fishy ids, and not authorized records
   def edit?
-    !record.is_a?(Class) && record.present? && 
-      scope.where(:id => record.id).exists? &&
-      update?
+    update?
   end
 
   def destroy?
@@ -52,12 +52,14 @@ class ApplicationPolicy
     end
 
     def resolve
-      scope
+      if current_user.admin?
+        scope.all
+      else
+        scope.none
+      end
     end
   end
 
-  protected
-  
   def current_user_allowed_to_crud?
     current_user.admin?
   end
