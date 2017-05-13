@@ -44,8 +44,7 @@ var Main = React.createClass({
 
     return (
       <div>
-        <MainNavBar controller={this.props.controller} currentUser={this.props.currentUser}>
-        </MainNavBar>
+        <MainNavBar controller={this.props.controller} currentUser={this.props.currentUser}/>
         <div className="container">
           {flashMessages}          
           {componentToRender}        
