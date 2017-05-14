@@ -3,8 +3,8 @@
     %span.glyphicon.glyphicon-plus
     New Run
   %h1 
-    = @desc[:head]
-  - if @desc[:filter].present?
+    = @desc.present? ? @desc[:head] : 'Listing Runs'
+  - if @desc && @desc[:filter].present?
     %p.lead.help-block
       %em= @desc[:filter] 
 

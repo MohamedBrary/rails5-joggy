@@ -1,12 +1,16 @@
 require 'rails_helper'
 
 RSpec.describe "runs/new", type: :view do
+  
+  let(:user) { create(:user) }
+
   before(:each) do
-    assign(:run, Run.new(
-      :duration => 1,
-      :distance => 1,
+    @run = assign(:run, Run.new(
+      :date => "2017-05-13",
+      :duration => 10,
+      :distance => 100,
       :avg_speed => 1.5,
-      :user => nil
+      :user => user
     ))
   end
 
@@ -19,9 +23,6 @@ RSpec.describe "runs/new", type: :view do
 
       assert_select "input[name=?]", "run[distance]"
 
-      assert_select "input[name=?]", "run[avg_speed]"
-
-      assert_select "input[name=?]", "run[user_id]"
     end
   end
 end

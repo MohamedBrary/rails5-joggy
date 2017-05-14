@@ -22,7 +22,7 @@ class Run < ApplicationRecord
 
   def adjust_duration
     # convert minutes into seconds
-    self.duration = duration * 60
+    self.duration = duration.to_i * 60
   end
 
   def calculate_avg_speed
