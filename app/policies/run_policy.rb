@@ -25,11 +25,11 @@ class RunPolicy < ApplicationPolicy
   end
   
   def destroy?
-    current_user_allowed_to_crud? || current_user.id == record.user_id
+    super && (current_user_allowed_to_crud? || current_user.id == record.user_id)
   end
 
   def update?
-    current_user_allowed_to_crud? || current_user.id == record.user_id
+    super && (current_user_allowed_to_crud? || current_user.id == record.user_id)
   end
 
   def permitted_attributes

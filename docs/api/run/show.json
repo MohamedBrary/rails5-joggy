@@ -1,12 +1,16 @@
 {
-  "resource": "User",
+  "resource": "Run",
   "resource_explanation": null,
   "http_method": "GET",
-  "route": "/api/v1/users",
-  "description": "index",
+  "route": "/api/v1/runs/:id",
+  "description": "show",
   "explanation": null,
   "parameters": [
-
+    {
+      "required": true,
+      "name": "id",
+      "description": "Run Unique Identifier"
+    }
   ],
   "response_fields": [
 
@@ -14,17 +18,17 @@
   "requests": [
     {
       "request_method": "GET",
-      "request_path": "/api/v1/users",
+      "request_path": "/api/v1/runs/9",
       "request_body": null,
       "request_headers": {
-        "Authorization": "Token token=\"cc7ae6e9\""
+        "Authorization": "Token token=\"3fa3245b\""
       },
       "request_query_parameters": {
       },
       "request_content_type": null,
       "response_status": 200,
       "response_status_text": "OK",
-      "response_body": "{\n  \"users\": [\n    {\n      \"id\": 31,\n      \"name\": \"Test User 32\",\n      \"role\": \"admin\",\n      \"created_at\": \"2017-05-14T23:26:35.000Z\",\n      \"updated_at\": \"2017-05-14T23:26:35.000Z\",\n      \"email\": \"user.32@example.net\"\n    }\n  ]\n}",
+      "response_body": "{\n  \"run\": {\n    \"id\": 9,\n    \"date\": \"2017-05-13\",\n    \"avg_speed\": 1.0,\n    \"duration\": 30.0,\n    \"user_id\": 14,\n    \"user\": \"Test User 14\"\n  }\n}",
       "response_headers": {
       },
       "response_content_type": "application/json; charset=utf-8",

@@ -17,14 +17,14 @@
       "request_path": "/api/v1/token",
       "request_body": null,
       "request_headers": {
-        "Authorization": "Token token=\"9dc9b8ff\""
+        "Authorization": "Token token=\"89360624\""
       },
       "request_query_parameters": {
       },
       "request_content_type": "application/x-www-form-urlencoded",
       "response_status": 200,
       "response_status_text": "OK",
-      "response_body": "{\n  \"user_token\": {\n    \"access_token\": \"9dc9b8ff\",\n    \"user\": {\n      \"id\": 4,\n      \"email\": \"user.4@example.com\",\n      \"name\": \"Test User 4\"\n    }\n  }\n}",
+      "response_body": "{\n  \"user_token\": {\n    \"access_token\": \"89360624\",\n    \"user\": {\n      \"id\": 26,\n      \"email\": \"user.26@example.org\",\n      \"name\": \"Test User 26\"\n    }\n  }\n}",
       "response_headers": {
       },
       "response_content_type": "application/json; charset=utf-8",

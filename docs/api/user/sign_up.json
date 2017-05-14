@@ -32,7 +32,7 @@
     {
       "request_method": "POST",
       "request_path": "/api/v1/users",
-      "request_body": "user[name]=Test+User+5&user[email]=user.5%40example.org&user[password]=12345678",
+      "request_body": "user[name]=Test+User+27&user[email]=27_user%40example.com&user[password]=12345678",
       "request_headers": {
       },
       "request_query_parameters": {
@@ -40,7 +40,7 @@
       "request_content_type": "application/x-www-form-urlencoded",
       "response_status": 201,
       "response_status_text": "Created",
-      "response_body": "{\n  \"user_token\": {\n    \"access_token\": \"c3833394\",\n    \"user\": {\n      \"id\": 5,\n      \"email\": \"user.5@example.org\",\n      \"name\": \"Test User 5\"\n    }\n  }\n}",
+      "response_body": "{\n  \"user_token\": {\n    \"access_token\": \"1c5e298a\",\n    \"user\": {\n      \"id\": 27,\n      \"email\": \"27_user@example.com\",\n      \"name\": \"Test User 27\"\n    }\n  }\n}",
       "response_headers": {
       },
       "response_content_type": "application/json; charset=utf-8",

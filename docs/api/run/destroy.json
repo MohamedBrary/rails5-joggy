@@ -1,0 +1,38 @@
+{
+  "resource": "Run",
+  "resource_explanation": null,
+  "http_method": "DELETE",
+  "route": "/api/v1/runs/:id",
+  "description": "destroy",
+  "explanation": null,
+  "parameters": [
+    {
+      "required": true,
+      "name": "id",
+      "description": "Run Unique Identifier"
+    }
+  ],
+  "response_fields": [
+
+  ],
+  "requests": [
+    {
+      "request_method": "DELETE",
+      "request_path": "/api/v1/runs/13",
+      "request_body": null,
+      "request_headers": {
+        "Authorization": "Token token=\"0d198731\""
+      },
+      "request_query_parameters": {
+      },
+      "request_content_type": "application/x-www-form-urlencoded",
+      "response_status": 204,
+      "response_status_text": "No Content",
+      "response_body": null,
+      "response_headers": {
+      },
+      "response_content_type": null,
+      "curl": null
+    }
+  ]
+}

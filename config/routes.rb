@@ -10,6 +10,7 @@ Rails.application.routes.draw do
           end
         end
         resource :user_token, path: :token, only: %w(create destroy)
+        resources :runs, only: %w(index create update show destroy)
       end
     end
   end

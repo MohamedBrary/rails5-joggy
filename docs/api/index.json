@@ -1,6 +1,47 @@
 {
   "resources": [
     {
+      "name": "Run",
+      "explanation": null,
+      "examples": [
+        {
+          "description": "create",
+          "link": "run/create.json",
+          "groups": "all",
+          "route": "/api/v1/runs",
+          "method": "post"
+        },
+        {
+          "description": "destroy",
+          "link": "run/destroy.json",
+          "groups": "all",
+          "route": "/api/v1/runs/:id",
+          "method": "delete"
+        },
+        {
+          "description": "index with filters",
+          "link": "run/index_with_filters.json",
+          "groups": "all",
+          "route": "/api/v1/runs",
+          "method": "get"
+        },
+        {
+          "description": "show",
+          "link": "run/show.json",
+          "groups": "all",
+          "route": "/api/v1/runs/:id",
+          "method": "get"
+        },
+        {
+          "description": "update",
+          "link": "run/update.json",
+          "groups": "all",
+          "route": "/api/v1/runs/:id",
+          "method": "put"
+        }
+      ]
+    },
+    {
       "name": "Token",
       "explanation": null,
       "examples": [

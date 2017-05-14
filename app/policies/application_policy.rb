@@ -26,8 +26,7 @@ class ApplicationPolicy
 
   def update?
     !record.is_a?(Class) && record.present? && 
-      scope.where(:id => record.id).exists? &&
-      current_user_allowed_to_crud?
+      scope.where(:id => record.id).exists?
   end
 
   # will catch fishy ids, and not authorized records
@@ -36,7 +35,8 @@ class ApplicationPolicy
   end
 
   def destroy?
-    current_user_allowed_to_crud?
+    !record.is_a?(Class) && record.present? && 
+      scope.where(:id => record.id).exists?
   end
 
   def scope

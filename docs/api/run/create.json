@@ -1,0 +1,51 @@
+{
+  "resource": "Run",
+  "resource_explanation": null,
+  "http_method": "POST",
+  "route": "/api/v1/runs",
+  "description": "create",
+  "explanation": null,
+  "parameters": [
+    {
+      "required": true,
+      "scope": "run",
+      "name": "date",
+      "description": "Date"
+    },
+    {
+      "required": true,
+      "scope": "run",
+      "name": "duration",
+      "description": "Duration in minutes"
+    },
+    {
+      "required": true,
+      "scope": "run",
+      "name": "distance",
+      "description": "Distance in meters"
+    }
+  ],
+  "response_fields": [
+
+  ],
+  "requests": [
+    {
+      "request_method": "POST",
+      "request_path": "/api/v1/runs",
+      "request_body": "run[date]=2017-05-13&run[duration]=30&run[distance]=500",
+      "request_headers": {
+        "Authorization": "Token token=\"68688b71\""
+      },
+      "request_query_parameters": {
+      },
+      "request_content_type": "application/x-www-form-urlencoded",
+      "response_status": 201,
+      "response_status_text": "Created",
+      "response_body": "{\n  \"run\": {\n    \"id\": 1,\n    \"date\": \"2017-05-13\",\n    \"avg_speed\": 1.0,\n    \"duration\": 30.0,\n    \"user_id\": 1,\n    \"user\": \"Test User 1\"\n  }\n}",
+      "response_headers": {
+      },
+      "response_content_type": "application/json; charset=utf-8",
+      "curl": null
+    }
+  ]
+}

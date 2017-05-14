@@ -1,0 +1,45 @@
+{
+  "resource": "Run",
+  "resource_explanation": null,
+  "http_method": "GET",
+  "route": "/api/v1/runs",
+  "description": "index with filters",
+  "explanation": null,
+  "parameters": [
+    {
+      "required": false,
+      "name": "from",
+      "description": "Date to filter runs from"
+    },
+    {
+      "required": false,
+      "name": "to",
+      "description": "Date to filter runs to"
+    }
+  ],
+  "response_fields": [
+
+  ],
+  "requests": [
+    {
+      "request_method": "GET",
+      "request_path": "/api/v1/runs?from=2017-05-14&to=2017-05-17",
+      "request_body": null,
+      "request_headers": {
+        "Authorization": "Token token=\"90799ab9\""
+      },
+      "request_query_parameters": {
+        "from": "2017-05-14",
+        "to": "2017-05-17"
+      },
+      "request_content_type": null,
+      "response_status": 200,
+      "response_status_text": "OK",
+      "response_body": "{\n  \"runs\": [\n    {\n      \"id\": 4,\n      \"date\": \"2017-05-15\",\n      \"avg_speed\": 1.0,\n      \"duration\": 30.0,\n      \"user_id\": 9,\n      \"user\": \"Test User 9\"\n    }\n  ],\n  \"desc\": {\n    \"head\": \"Filtering Runs\",\n    \"filter\": \"from date '2017-05-14' and to date '2017-05-17'\"\n  }\n}",
+      "response_headers": {
+      },
+      "response_content_type": "application/json; charset=utf-8",
+      "curl": null
+    }
+  ]
+}

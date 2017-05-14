@@ -18,17 +18,17 @@
   "requests": [
     {
       "request_method": "GET",
-      "request_path": "/api/v1/users/10",
+      "request_path": "/api/v1/users/32",
       "request_body": null,
       "request_headers": {
-        "Authorization": "Token token=\"1263f1bc\""
+        "Authorization": "Token token=\"a410bee3\""
       },
       "request_query_parameters": {
       },
       "request_content_type": null,
       "response_status": 200,
       "response_status_text": "OK",
-      "response_body": "{\n  \"user\": {\n    \"id\": 10,\n    \"email\": \"11_user@example.org\",\n    \"name\": \"Test User 11\"\n  }\n}",
+      "response_body": "{\n  \"user\": {\n    \"id\": 32,\n    \"email\": \"33_user@example.com\",\n    \"name\": \"Test User 33\"\n  }\n}",
       "response_headers": {
       },
       "response_content_type": "application/json; charset=utf-8",
