@@ -68,10 +68,7 @@ resource 'User', :type => :api do
 
     header 'AUTHORIZATION', :token
 
-    parameter :id, 'User Unique Identifier', required: true
-
     let(:token) { ActionController::HttpAuthentication::Token.encode_credentials user.user_tokens.first.try(:access_token) }
-    let(:id) { user.id }
 
     example_request 'index' do
       response_json = JSON.parse response_body
@@ -84,11 +81,7 @@ resource 'User', :type => :api do
     before { admin_user.save }
 
     header 'AUTHORIZATION', :token
-
-    parameter :id, 'User Unique Identifier', required: true
-
     let(:token) { ActionController::HttpAuthentication::Token.encode_credentials admin_user.user_tokens.first.try(:access_token) }
-    let(:id) { admin_user.id }
 
     example_request 'index' do
       response_json = JSON.parse response_body
