@@ -9,9 +9,9 @@
     %thead
       %tr
         %th Date
-        %th Duration
-        %th Distance
-        %th Avg speed
+        %th Duration (Mins)
+        %th Distance (M)
+        %th Avg Speed (Km/H)
         %th User
         %th
         %th
@@ -21,7 +21,7 @@
       - @runs.each do |run|
         %tr
           %td= run.date
-          %td= run.duration
+          %td= run.duration_minutes
           %td= run.distance
           %td= run.avg_speed
           %td= run.user.name

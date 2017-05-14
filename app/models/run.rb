@@ -17,25 +17,31 @@ class Run < ApplicationRecord
   end
 
   # -- Callbacks
-  before_validation :calculate_avg_speed
+  before_validation :adjust_duration, :calculate_avg_speed
+
+  def adjust_duration
+    # convert minutes into seconds
+    self.duration = duration * 60
+  end
 
   def calculate_avg_speed
   	# duration in seconds, and distance in meters
   	# producing avg. speed in km/h
-  	self.avg_speed = (distance.to_f / 1000) / (duration.to_f / 60)
+  	self.avg_speed = (distance.to_f / 1000) / (duration.to_f / 3600)
   end
 
   # -- Duration
 
   def duration_minutes
-    duration / 60
+    duration.to_f / 60
   end
   
   # -- Stats
 
-  scope :by_user, ->(user_id) { where(user_id: user_id) }  
+  scope :by_user, -> (user_id) { where(user_id: user_id) }  
   scope :current_week, -> { where(date: Time.now.beginning_of_week..Time.now.end_of_week) }
   scope :prev_week, -> { where(date: 7.days.ago.beginning_of_week..7.days.ago.end_of_week) }
+  scope :last_week_num, -> (week_num) { where(date: (week_num*7).days.ago.beginning_of_week..(week_num*7).days.ago.end_of_week) }
 
   def self.avg_speed(user_id=nil)
     scope = self
@@ -47,6 +53,7 @@ class Run < ApplicationRecord
     scope = self.current_week
     scope = scope.by_user(user_id) if user_id.present?
     scope.average(:avg_speed)
+      
   end
 
   def self.avg_speed_prev_week(user_id=nil)

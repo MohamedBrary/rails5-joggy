@@ -5,16 +5,16 @@
   = link_to edit_run_path(@run), class: 'btn btn-primary' do
     %span.glyphicon.glyphicon-pencil
     Edit
-  %h1 Show run
+  %h1 Show Run
 
 %dl.dl-horizontal
   %dt Date:
   %dd= @run.date
-  %dt Duration:
-  %dd= @run.duration
-  %dt Distance:
+  %dt Duration (Mins):
+  %dd= @run.duration_minutes
+  %dt Distance (M):
   %dd= @run.distance
-  %dt Avg speed:
+  %dt Avg Speed (Km/H):
   %dd= @run.avg_speed
   %dt User:
   %dd= @run.user

@@ -69,6 +69,10 @@ class User < ApplicationRecord
 
   # -- Utils
 
+  def to_s
+    name
+  end
+
   delegate :url_helpers, to: 'Rails.application.routes'
   def to_hash(current_user=nil)
     h = {
