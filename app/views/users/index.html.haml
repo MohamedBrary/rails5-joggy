@@ -11,10 +11,22 @@
         %th Name
         %th Email
         %th Role
+        %th Runs Count
+        %th Avg. Speed (Km/H)
+        %th Total Distance (M)
+        %th Total Duration (Mins)
         %th
         %th
         %th
-
+    %tfoot
+      %tr{style: 'background-color:darkgray;color: black;text-align: center;'}
+        %td{colspan: 3, style: 'background-color:grey;color: white;font-weight: bold;text-align: center;'}
+          %img{ src: '/favicon.ico', width: '20px'}
+          = "Joggy (#{User.count}) Users Statistics"
+        %td= Run.count
+        %td= Run.avg_speed
+        %td= Run.distance
+        %td= Run.duration
     %tbody
       - @users.each do |user|
         %tr
@@ -23,6 +35,10 @@
             = user.name
           %td= user.email
           %td= user.role.titleize
+          %td{style: 'text-align: center;'}= user.runs.count
+          %td{style: 'text-align: center;'}= Run.avg_speed user.id
+          %td{style: 'text-align: center;'}= Run.distance user.id
+          %td{style: 'text-align: center;'}= Run.duration user.id
           %td= link_to 'Show', user
           %td= link_to 'Edit', edit_user_path(user)
           %td= link_to 'Destroy', user, data: { confirm: 'Are you sure?' }, method: :delete

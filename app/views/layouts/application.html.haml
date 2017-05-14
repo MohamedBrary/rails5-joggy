@@ -26,7 +26,9 @@
             %span.icon-bar
             %span.icon-bar
             %span.icon-bar
-          = link_to "Joggy", home_index_path, class: "navbar-brand"
+          %a.navbar-brand{href:home_index_path} 
+            %img.inline{ src: '/favicon.ico', width: '20px', style:'display: inline;'}
+            Joggy
         #navbar.collapse.navbar-collapse
           %ul.nav.navbar-nav
             / .active

@@ -1,11 +1,17 @@
 class RunsController < ApplicationController
   before_action :set_run, only: [:show, :edit, :update, :destroy]
-  before_action :authorize_run  
+  before_action :authorize_run
+  before_action :set_users, only: [:new, :create, :edit, :update]
 
   # GET /runs
   # GET /runs.json
   def index
     @runs = policy_scope(Run)
+    filtering_service = FilterRunsService.new from: params[:from], to: params[:to], runs: @runs
+
+    # making a readable description to user filter
+    @desc = filtering_service.description
+    @runs = filtering_service.filter 
   end
 
   # GET /runs/1
@@ -79,5 +85,11 @@ class RunsController < ApplicationController
     def run_params
       params.require(:run).permit(policy(@run || Run).permitted_attributes)
       # params.require(:run).permit(:date, :duration, :distance, :avg_speed, :user_id)
+    end
+
+    # only crud users can change run owner, TODO check the logic behind that?!
+    def set_users
+      @can_change_owner = policy(@run || Run).current_user_allowed_to_crud?
+      @users = policy_scope(User).map{|u| [ u.name, u.id ] } if @can_change_owner
     end
 end

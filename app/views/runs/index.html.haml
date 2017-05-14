@@ -2,7 +2,20 @@
   = link_to new_run_path, class: 'btn btn-primary' do
     %span.glyphicon.glyphicon-plus
     New Run
-  %h1 Listing runs
+  %h1 
+    = @desc[:head]
+  - if @desc[:filter].present?
+    %p.lead.help-block
+      %em= @desc[:filter] 
+
+
+:css
+  .form-control-inline {width:auto;display:inline-block;}
+= form_tag '', :method => :get, class: "form-horizontal", role: "form", style: 'margin-left: 20px;' do
+  .form-group.form-control-inline
+    %input{name: 'from', class: 'form-control form-control-inline', placeholder: 'Filter runs from this date', value: params[:from]}
+    %input{name: 'to', class: 'form-control form-control-inline', placeholder: 'Filter runs to this date', value: params[:to]}
+  = submit_tag 'Filter', class: 'btn btn-primary form-control-inline', style: 'margin-left: 20px;'
 
 .table-responsive
   %table.table.table-striped.table-bordered.table-hover

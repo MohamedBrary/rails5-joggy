@@ -17,6 +17,7 @@ class Run < ApplicationRecord
   end
 
   # -- Callbacks
+
   before_validation :adjust_duration, :calculate_avg_speed
 
   def adjust_duration
@@ -35,13 +36,19 @@ class Run < ApplicationRecord
   def duration_minutes
     duration.to_f / 60
   end
+
+  # -- Fitering
+  scope :between, -> (from, to) {where("date >= ? && date <= ?", from || Date.new, to || 10.years.from_now.to_date)}
   
   # -- Stats
+  # TODO dry this up
 
   scope :by_user, -> (user_id) { where(user_id: user_id) }  
   scope :current_week, -> { where(date: Time.now.beginning_of_week..Time.now.end_of_week) }
   scope :prev_week, -> { where(date: 7.days.ago.beginning_of_week..7.days.ago.end_of_week) }
   scope :last_week_num, -> (week_num) { where(date: (week_num*7).days.ago.beginning_of_week..(week_num*7).days.ago.end_of_week) }
+
+  # -- Stats::AvgSpeed
 
   def self.avg_speed(user_id=nil)
     scope = self
@@ -62,6 +69,56 @@ class Run < ApplicationRecord
     scope.average(:avg_speed)
   end
 
+  # -- Stats::Duration
+
+  def self.duration(user_id=nil)
+    scope = self
+    scope = scope.by_user(user_id) if user_id.present?
+    scope.sum(:duration)
+  end
+
+  def self.duration_current_week(user_id=nil)
+    scope = self.current_week
+    scope = scope.by_user(user_id) if user_id.present?
+    scope.sum(:duration)
+      
+  end
+
+  def self.duration_prev_week(user_id=nil)
+    scope = self.prev_week
+    scope = scope.by_user(user_id) if user_id.present?
+    scope.sum(:duration)
+  end
+
+  # -- Stats::Distance
+
+  def self.distance(user_id=nil)
+    scope = self
+    scope = scope.by_user(user_id) if user_id.present?
+    scope.sum(:distance)
+  end
+
+  def self.distance_current_week(user_id=nil)
+    scope = self.current_week
+    scope = scope.by_user(user_id) if user_id.present?
+    scope.sum(:distance)
+      
+  end
+
+  def self.distance_prev_week(user_id=nil)
+    scope = self.prev_week
+    scope = scope.by_user(user_id) if user_id.present?
+    scope.sum(:distance)
+  end
+
+  # -- Stats::RunsCount
+
+  def self.run_counts(user_id=nil)
+    scope = self
+    scope = scope.by_user(user_id) if user_id.present?
+    scope.count
+  end
+
   def self.run_counts_current_week(user_id=nil)
     scope = self.current_week
     scope = scope.by_user(user_id) if user_id.present?
@@ -74,9 +131,25 @@ class Run < ApplicationRecord
     scope.count
   end
 
+  # -- Stats::Comparisons  
+
   def self.compare_weeks_avg_speed(user_id=nil)
     prev_week = avg_speed_prev_week(user_id).to_f
     current_week = avg_speed_current_week(user_id).to_f
+    
+    compare prev_week, current_week
+  end
+
+  def self.compare_weeks_duration(user_id=nil)
+    prev_week = duration_prev_week(user_id).to_i
+    current_week = duration_current_week(user_id).to_i
+    
+    compare prev_week, current_week
+  end
+
+  def self.compare_weeks_distance(user_id=nil)
+    prev_week = distance_prev_week(user_id).to_i
+    current_week = distance_current_week(user_id).to_i
     
     compare prev_week, current_week
   end

@@ -17,19 +17,16 @@
   .form-group
     = f.label :duration, class: 'col-sm-2 control-label'
     .col-sm-10
-      = f.number_field :duration, class: 'form-control'
+      = f.number_field :duration, class: 'form-control', placeholder: 'in minutes'
   .form-group
     = f.label :distance, class: 'col-sm-2 control-label'
     .col-sm-10
-      = f.number_field :distance, class: 'form-control'
-  .form-group
-    = f.label :avg_speed, class: 'col-sm-2 control-label'
-    .col-sm-10
-      = f.text_field :avg_speed, class: 'form-control'
-  .form-group
-    = f.label :user_id, class: 'col-sm-2 control-label'
-    .col-sm-10
-      = f.text_field :user_id, class: 'form-control'
+      = f.number_field :distance, class: 'form-control', placeholder: 'in meters'  
+  - if @can_change_owner
+    .form-group
+      = f.label :user_id, class: 'col-sm-2 control-label'
+      .col-sm-10
+        = f.select :user_id, @users, {}, class: 'form-control'
   .form-group
     .col-sm-offset-2.col-sm-10
       = f.submit class: 'btn btn-primary'
