@@ -3,6 +3,16 @@ class RunsController < ApplicationController
   before_action :authorize_run
   before_action :set_users, only: [:new, :create, :edit, :update]
 
+  # GET /runs/index_spa  
+  def index_spa
+    @runs = policy_scope(Run)
+    filtering_service = FilterRunsService.new from: params[:from], to: params[:to], runs: @runs
+
+    # making a readable description to user filter
+    @desc = filtering_service.description
+    @runs = filtering_service.filter 
+  end
+
   # GET /runs
   # GET /runs.json
   def index

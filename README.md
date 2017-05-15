@@ -1,6 +1,6 @@
-## Rails 5 Starter Application
+## Joggy - Sample Rails 5 Application
 
-This is a Rails 5 starter application to boost your MVP development.
+This sample project is built on this [Rails 5 starter application](https://github.com/MohamedBrary/rails_starter_react).
 
 #### What is featured till now:
 
@@ -10,15 +10,14 @@ This is a Rails 5 starter application to boost your MVP development.
 * Pundit for authorization, and different roles for users
 * API with token authentication
 * Rspec and Capybara for automated testing, and test coverage for all implemented features
+* React integeration
 
 #### Take a look:
 
-This application is deployed on [Heroku](https://rails5-starter.herokuapp.com), use these credentials to login as an admin user:
-* Email: 'admin@rails5-starter.com'
+This application is deployed on [Heroku](https://joggy.herokuapp.com), use these credentials to login as an admin user:
+* Email: 'admin@joggy.com'
 * Password: 'password'
-
-_To see the steps used creating this app, checkout out this [gist](https://gist.github.com/MohamedBrary/12465abb009d5dbeadeb8cde9adb30b5)._
 
 ***
 
-For the same features but integerating **React** in the front end, checkout out this [repository](https://github.com/MohamedBrary/rails_starter_react).
+_To see the steps used creating this app, checkout out this [gist](https://gist.github.com/MohamedBrary/12465abb009d5dbeadeb8cde9adb30b5)._

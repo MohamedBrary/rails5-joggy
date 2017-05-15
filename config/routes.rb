@@ -1,5 +1,4 @@
 Rails.application.routes.draw do
-  resources :runs
   namespace :api, defaults: {format: :json} do
     %w(v1).each do |version|
       namespace version.to_sym do
@@ -27,7 +26,10 @@ Rails.application.routes.draw do
     get '/users/auth/:provider/setup', :to => 'omniauth_callbacks#setup'
   end
   resources :users, except: [:new, :create]
+  get '/runs/index_spa/', to: 'runs#index_spa'  
+  resources :runs
 
+  get '/home/', to: 'home#index'
   get 'home/index'
   root "home#index"  
 end
