@@ -22,6 +22,7 @@ module Api::V1::ModelHash
         id: run.id,
         date: run.date,
         avg_speed: run.avg_speed,
+        distance: run.distance,
         duration: run.duration_minutes,
         user_id: run.user_id,
         user: run.user.name

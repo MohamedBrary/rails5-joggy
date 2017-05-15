@@ -4,10 +4,9 @@ class Run < ApplicationRecord
   # -- Validations
     
   validates_presence_of   :date
-  validates_presence_of   :duration
-  validates_presence_of   :distance
   validates_presence_of   :avg_speed
-
+  validates :duration, presence: true, numericality: { greater_than: 0 }
+  validates :distance, presence: true, numericality: { greater_than: 0 }
   validate :duration_length
  
   def duration_length
@@ -20,6 +19,7 @@ class Run < ApplicationRecord
 
   before_validation :adjust_duration, :calculate_avg_speed
 
+  # TODO make duration into minutes originally
   def adjust_duration
     # convert minutes into seconds
     self.duration = duration.to_i * 60
@@ -34,7 +34,7 @@ class Run < ApplicationRecord
   # -- Duration
 
   def duration_minutes
-    duration.to_f / 60
+    read_attribute(:duration).to_f / 60
   end
 
   # -- Fitering
@@ -166,4 +166,50 @@ class Run < ApplicationRecord
     # prev_week > current_week ? -1*prev_week/current_week : current_week/prev_week
     (current_week - prev_week).to_f.round(1)
   end
+
+  # -- Stats::Hashes
+  def self.current_week_stats(user_id=nil)
+    {
+      runs_count: run_counts_current_week(user_id),
+      avg_speed: avg_speed_current_week(user_id),
+      total_distance: distance_current_week(user_id),
+      total_duration: duration_current_week(user_id)
+    }
+  end
+
+  def self.prev_week_stats(user_id=nil)
+    {
+      runs_count: run_counts_prev_week(user_id),
+      avg_speed: avg_speed_prev_week(user_id),
+      total_distance: distance_prev_week(user_id),
+      total_duration: duration_prev_week(user_id)
+    }
+  end
+
+  def self.total_stats(user_id=nil)
+    {
+      runs_count: run_counts(user_id),
+      avg_speed: avg_speed(user_id),
+      total_distance: distance(user_id),
+      total_duration: duration(user_id)
+    }
+  end
+
+  # -- Utils
+  def to_hash
+    {
+      id: id,
+      date: date,
+      avg_speed: avg_speed,
+      distance: distance,
+      duration: duration_minutes,
+      user_id: user_id,
+      user: user.name
+    }
+  end
+  
+  def self.to_hash(runs)
+    runs.map{ |r| r.to_hash }
+  end
+
 end

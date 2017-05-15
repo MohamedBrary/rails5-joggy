@@ -5,12 +5,25 @@ class RunsController < ApplicationController
 
   # GET /runs/index_spa  
   def index_spa
-    @runs = policy_scope(Run)
+    @runs = policy_scope(Run).includes :user
     filtering_service = FilterRunsService.new from: params[:from], to: params[:to], runs: @runs
 
     # making a readable description to user filter
-    @desc = filtering_service.description
-    @runs = filtering_service.filter 
+    desc = filtering_service.description
+    set_users
+    
+    # setting props for React component
+    @props[:runs] = Run.to_hash filtering_service.filter
+    @props[:can_change_owner] = @can_change_owner
+    @props[:users] = @users if @can_change_owner
+    @props[:authenticity_token] = form_authenticity_token    
+    @props[:filter_from] = params[:from]
+    @props[:filter_to] = params[:to]
+    @props[:desc_head] = desc[:head]
+    @props[:desc_filter] = desc[:filter]
+    @props[:current_week_stats] = Run.current_week_stats(current_user.id)
+    @props[:prev_week_stats] = Run.prev_week_stats(current_user.id)
+    @props[:total_stats] = Run.total_stats(current_user.id)
   end
 
   # GET /runs

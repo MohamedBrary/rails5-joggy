@@ -16,6 +16,8 @@
     = javascript_include_tag 'application', 'data-turbolinks-track' => true
     = csrf_meta_tags
   %body
+    :css
+      .form-control-inline {width:auto;display:inline-block;}
     - # removing React components and going back to haml version
     - react_component('Main', @props)
     %nav.navbar.navbar-inverse.navbar-fixed-top{role: "navigation"}

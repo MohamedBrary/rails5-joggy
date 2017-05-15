@@ -21,6 +21,6 @@ class ApplicationController < ActionController::Base
       controller: controller_name,
       action: action_name,
       flash: flash,
-      current_user: current_user.try(:to_hash)}
+      current_user: current_user.try(:to_hash, current_user)}
   end
 end

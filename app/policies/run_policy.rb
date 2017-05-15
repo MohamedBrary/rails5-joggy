@@ -15,6 +15,10 @@ class RunPolicy < ApplicationPolicy
     true
   end
 
+  def index_spa?
+    index?
+  end
+
   def create?
     true
   end
