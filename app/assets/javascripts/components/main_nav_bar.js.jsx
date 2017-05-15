@@ -31,6 +31,9 @@ var MainNavBar = React.createClass({
               <li className={this.props.controller == 'home' ? 'active' : ''}>
                 <a href="/home/index">Home</a>
               </li>
+              <li className={this.props.controller == 'apitome/docs' ? 'active' : ''}>
+                <a href="/docs/api/">API Documentation</a>
+              </li>
               <li className={this.props.controller == 'users' ? 'active' : ''}>
                 <a href="/users">Users</a>
               </li>              

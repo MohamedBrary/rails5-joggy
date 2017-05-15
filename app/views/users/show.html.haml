@@ -7,17 +7,91 @@
     Edit
   %h1 Show user
 
-%table
-  %td{ style: 'padding-left:150px'}
-    %img{ src: @user.image, width: '100px'}  
-  %td{ style: 'padding-left:50px'}
-    %p
-      %b Name:
-    %p 
-      %b Email:
-    %p 
-      %b Role:
-  %td{ style: 'padding-left:20px'}
-    %p= @user.name
-    %p= @user.email
-    %p= @user.role.titleize
+.panel.panel-default.devise-bs
+  .panel-heading
+    %h4 User Information
+  .panel-body
+    %table
+      %td{ style: 'padding-left:125px'}
+        %img{ src: @user.image, width: '100px'}  
+      %td{ style: 'padding-left:25px'}
+        %p
+          %b Name:
+        %p 
+          %b Email:
+        %p 
+          %b Role:
+      %td{ style: 'padding-left:20px'}
+        %p= @user.name
+        %p= @user.email
+        %p= @user.role.titleize
+
+.panel.panel-default.devise-bs
+  .panel-heading
+    %h4 Joggy Statistics
+  .panel-body
+    %table    
+      %tr
+        %td{ rowspan: 2, style: 'padding-left:100px; padding-right:30px'}
+          %img{ src: '/favicon.ico', width: '100px'}  
+        %td{colspan: 2, style:"text-align: center;"}
+          %p.lead Overall Stats
+          %hr
+        %td{colspan: 2, style:"text-align: center;"}
+          %p.lead Last Week Stats
+          %hr
+        %td{colspan: 2, style:"text-align: center;"}
+          %p.lead Current Week Stats
+          %hr
+      %tr
+        %td{ style: 'padding-left:60px'}
+        %td{ style: 'padding-left:25px'}    
+          %p
+            %b Runs Count:
+            %span= Run.run_counts @user.id
+          %p 
+            %b Avg. Speed (Km/H):
+            %span= Run.avg_speed @user.id
+          %p 
+            %b Total Distance (M):
+            %span= Run.distance @user.id
+          %p 
+            %b Total Duration (Mins):
+            %span= Run.duration @user.id
+        %td{ style: 'padding-left:20px'}
+        %td{ style: 'padding-left:25px'}    
+          %p
+            %b Runs Count:
+            %span= Run.run_counts_prev_week @user.id
+          %p 
+            %b Avg. Speed (Km/H):
+            %span= Run.avg_speed_prev_week @user.id
+          %p 
+            %b Total Distance (M):
+            %span= Run.distance_prev_week @user.id
+          %p 
+            %b Total Duration (Mins):
+            %span= Run.duration_prev_week @user.id
+        %td{ style: 'padding-left:20px'}        
+        %td{ style: 'padding-left:25px'}    
+          %p
+            %b Runs Count:
+            %span= Run.run_counts_current_week @user.id
+            = render 'diff', diff: Run.compare_weeks_run_counts(@user.id)            
+          %p 
+            %b Avg. Speed (Km/H):
+            %span= Run.avg_speed_current_week @user.id
+            = render 'diff', diff: Run.compare_weeks_avg_speed(@user.id)            
+          %p 
+            %b Total Distance (M):
+            %span= Run.distance_current_week @user.id
+            = render 'diff', diff: Run.compare_weeks_distance(@user.id)            
+          %p 
+            %b Total Duration (Mins):
+            %span= Run.duration_current_week @user.id
+            = render 'diff', diff: Run.compare_weeks_duration(@user.id)            
+            
+          
+          
+          
+

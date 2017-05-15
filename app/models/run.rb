@@ -45,7 +45,7 @@ class Run < ApplicationRecord
 
   scope :by_user, -> (user_id) { where(user_id: user_id) }  
   scope :current_week, -> { where(date: Time.now.beginning_of_week..Time.now.end_of_week) }
-  scope :prev_week, -> { where(date: 7.days.ago.beginning_of_week..7.days.ago.end_of_week) }
+  scope :prev_week, -> { where(date: 6.days.ago.beginning_of_week..6.days.ago.end_of_week) }
   scope :last_week_num, -> (week_num) { where(date: (week_num*7).days.ago.beginning_of_week..(week_num*7).days.ago.end_of_week) }
 
   # -- Stats::AvgSpeed
@@ -53,20 +53,20 @@ class Run < ApplicationRecord
   def self.avg_speed(user_id=nil)
     scope = self
     scope = scope.by_user(user_id) if user_id.present?
-    scope.average(:avg_speed)
+    scope.average(:avg_speed).to_f.round(1)
   end
 
   def self.avg_speed_current_week(user_id=nil)
     scope = self.current_week
     scope = scope.by_user(user_id) if user_id.present?
-    scope.average(:avg_speed)
+    scope.average(:avg_speed).to_f.round(1)
       
   end
 
   def self.avg_speed_prev_week(user_id=nil)
     scope = self.prev_week
     scope = scope.by_user(user_id) if user_id.present?
-    scope.average(:avg_speed)
+    scope.average(:avg_speed).to_f.round(1)
   end
 
   # -- Stats::Duration
@@ -74,20 +74,20 @@ class Run < ApplicationRecord
   def self.duration(user_id=nil)
     scope = self
     scope = scope.by_user(user_id) if user_id.present?
-    scope.sum(:duration)
+    (scope.sum(:duration)/60).to_f.round(1)
   end
 
   def self.duration_current_week(user_id=nil)
     scope = self.current_week
     scope = scope.by_user(user_id) if user_id.present?
-    scope.sum(:duration)
+    (scope.sum(:duration)/60).to_f.round(1)
       
   end
 
   def self.duration_prev_week(user_id=nil)
     scope = self.prev_week
     scope = scope.by_user(user_id) if user_id.present?
-    scope.sum(:duration)
+    (scope.sum(:duration)/60).to_f.round(1)
   end
 
   # -- Stats::Distance
@@ -164,6 +164,6 @@ class Run < ApplicationRecord
   def self.compare prev_week, current_week
     # return 0 if current_week == 0 && prev_week == 0
     # prev_week > current_week ? -1*prev_week/current_week : current_week/prev_week
-    current_week - prev_week
+    (current_week - prev_week).to_f.round(1)
   end
 end

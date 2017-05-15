@@ -1,0 +1,9 @@
+%span{class: "#{diff >= 0 ? 'text-success' : 'text-danger'}"}
+  (
+  - if diff > 0
+    %span{class:"glyphicon glyphicon-triangle-top"}
+    = diff
+  - elsif diff < 0
+    %span{class:"glyphicon glyphicon-triangle-bottom"}
+    = diff * -1
+  )
